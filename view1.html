@@ -1,0 +1,51 @@
+<style>
+    .red {color: red;}
+    .blue {color: blue;}
+    .green {color: green;}
+</style>
+
+Найти:
+<input ng-model="myQuery"><br><br>
+
+Сортировать по:
+<select ng-model="myOrderProperty">
+    <!--Добавить сортировку по имени-->
+    <option value="name">Имени</option>
+    <option value="id">ID</option>
+    <option value="weight">Весу</option>
+    <!--Добавить сортировку по весу в порядке убывания-->
+    <option value="-weight">Весу в порядке убывания</option>
+    <option value="height">Росту</option>
+</select>
+
+<!--Добавить дропдаун с фильтрацией по типу-->
+Тип:
+<select ng-model="myFilterProperty">
+    <option value="{{undefined}}" selected>Любой</option>
+    <option value="normal">normal</option>
+    <option value="electric">electric</option>
+    <option value="grass">grass</option>
+    <option value="fire">fire</option>
+    <option value="water">water</option>
+</select>
+
+<ul>
+    <li ng-repeat="pokemon in pokemons | filter: myQuery | filter: {type: myFilterProperty} | orderBy: myOrderProperty">
+        <!--Вывести alert с именем покемона по клику на его картинку-->
+        <img src="{{pokemon.ThumbnailImage}}" ng-click="alert(pokemon.name)">
+
+        <small>ID #{{pokemon.id }}</small>
+		
+        <!--Вывести имя покемонов разными цветами: синим - если водный тип; красным - если огонь; зеленым - если трава (ng-class) -->
+        <h1 ng-class="pokemon.type [0] == 'fire' ? 'red' : (pokemon.type [0] == 'water' ? 'blue' : (pokemon.type [0] == 'grass' ? 'green' : ''))">{{pokemon.name}}</h1>
+        
+        <p>Вес: {{pokemon.weight}}, рост: {{pokemon.height}}</p>
+        <p>Тип: {{pokemon.type [0]}}</p>
+        <hr />
+    </li>
+</ul>
+
+<p ng-show="myQuery">
+    Выведены покемоны, содержащие
+    {{myQuery}}
+</p>
