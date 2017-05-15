@@ -122,8 +122,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
         $scope.myOrderProperty = 'id';
 		
-		//Вывести alert с именем покемона по клику на его картинку
-		$scope.alert = function(text) {
+	//Вывести alert с именем покемона по клику на его картинку
+	$scope.alert = function(text) {
             alert(text);
         }
 
